@@ -19,7 +19,7 @@ const logger = winston.createLogger({
 });
 
 // ONLY add file logging if we are NOT in production
-if (!isProduction) {
+if (!isProduction || process.env.NODE_ENV === 'development') {
   logger.add(new winston.transports.File({ filename: 'logs/error.log', level: 'error' }));
   logger.add(new winston.transports.File({ filename: 'logs/combined.log' }));
 }
