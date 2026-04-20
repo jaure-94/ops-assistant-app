@@ -18,7 +18,7 @@ export const getLandingPage = (req: Request, res: Response) => {
     <body>
         <div class="card">
             <h1>🤖 Automated Ops Assistant API</h1>
-            <p>The system is <strong>Live</strong>. Use the endpoints below to test the Triage and Reporting engine.</p>
+            <p>The system is <strong>Live</strong>. Use the endpoints below to test the Triage and Reporting engine via a tool like Postman.</p>
             <h3>1. Create a Ticket <span class="tag">POST</span></h3>
             <code>POST /tickets</code>
             <h3>2. Daily Report <span class="tag">GET</span></h3>
