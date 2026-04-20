@@ -1,7 +1,8 @@
 import winston from 'winston';
 
-// Check if we are running on Vercel/Production
-const isProduction = process.env.NODE_ENV === 'production';
+// Vercel and most cloud providers set specific environment variables
+const isVercel = process.env.VERCEL === '1';
+const isDev = process.env.NODE_ENV === 'development';
 
 const logger = winston.createLogger({
   level: 'info',
@@ -13,15 +14,23 @@ const logger = winston.createLogger({
     })
   ),
   transports: [
-    // Always log to the console (Vercel will capture this)
+    // This satisfies your logging requirement in ALL environments
     new winston.transports.Console(),
   ],
 });
 
-// ONLY add file logging if we are NOT in production
-if (!isProduction || process.env.NODE_ENV === 'development') {
-  logger.add(new winston.transports.File({ filename: 'logs/error.log', level: 'error' }));
-  logger.add(new winston.transports.File({ filename: 'logs/combined.log' }));
+/**
+ * ONLY add file logging if we are explicitly in Development 
+ * AND not on the Vercel platform.
+ */
+if (isDev && !isVercel) {
+  try {
+    logger.add(new winston.transports.File({ filename: 'logs/error.log', level: 'error' }));
+    logger.add(new winston.transports.File({ filename: 'logs/combined.log' }));
+  } catch (err) {
+    // Silent fail for file logging to prevent the entire app from crashing
+    console.warn("Could not initialize file logging, falling back to console only.");
+  }
 }
 
 export default logger;
