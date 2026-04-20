@@ -19,22 +19,26 @@ app.use("/reports", reportRouter);
 app.use("/kb", kbRouter);
 
 // error handling middleware
-app.use(errorHandler)
+app.use(errorHandler);
 
-// wait for db, then start the server
-const startServer = async () => {
-  try {
-    await conn();
-  } catch (error) {
-    logger.error('Failed to connect to the database:', error);
-    process.exit(1);
-  }
-  
-  app.listen(port, () => {
-    logger.info(`Server is running on port ${port}`);
-  });
-};
-
-startServer();
-
+// For Vercel serverless deployment
 export default app;
+
+// For local development (only run server if not in Vercel environment)
+if (process.env.VERCEL !== '1') {
+  // wait for db, then start the server
+  const startServer = async () => {
+    try {
+      await conn();
+    } catch (error) {
+      logger.error('Failed to connect to the database:', error);
+      process.exit(1);
+    }
+    
+    app.listen(port, () => {
+      logger.info(`Server is running on port ${port}`);
+    });
+  };
+
+  startServer();
+}

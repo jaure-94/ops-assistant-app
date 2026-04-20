@@ -34,13 +34,14 @@ export const conn = async () => {
     await import('../models/index.js');
 
     // sync models in development mode only to avoid accidental data loss in production
-    if (process.env.NODE_ENV !== 'production') {
+    // In Vercel/serverless, we should not sync automatically
+    if (process.env.NODE_ENV !== 'production' && process.env.VERCEL !== '1') {
       await sequelize.sync({ alter: true });
       logger.info('📂 Database schemas synchronized.');
     }
   } catch (error) {
     logger.error('Unable to connect to the database:', error);
-    process.exit(1); // Exit the process with an error code
+    throw error; // In serverless, don't exit process, let it throw
   }
 };
 

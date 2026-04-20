@@ -8,7 +8,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\""
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\"",
+    "build": "tsc",
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
