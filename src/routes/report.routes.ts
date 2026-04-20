@@ -1,0 +1,6 @@
+import { Router } from 'express';
+import { getDailyReport } from '../controllers/report.controller.js';
+
+export const router = Router();
+
+router.get('/daily', getDailyReport);
