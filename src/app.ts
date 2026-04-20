@@ -1,5 +1,5 @@
 import express from 'express';
-import { ticketRouter, reportRouter, kbRouter } from './routes/index.js';
+import { ticketRouter, reportRouter, kbRouter, homeRouter } from './routes/index.js';
 import { addTimestamp, errorHandler } from './middlewares/index.js';
 import { conn } from './config/index.js';
 import logger from './utils/logger.js';
@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(addTimestamp);
 
 // routes
+app.use("/", homeRouter);
 app.use("/tickets", ticketRouter);
 app.use("/reports", reportRouter);
 app.use("/kb", kbRouter);
