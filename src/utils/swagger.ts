@@ -58,6 +58,42 @@ const options: swaggerJsdoc.Options = {
                         },
                     },
                 },
+                KnowledgeBase: {
+                    type: 'object',
+                    required: ['pattern', 'category', 'priority', 'suggested_response'],
+                    properties: {
+                        id: {
+                            type: 'string',
+                            format: 'uuid',
+                        },
+                        pattern: {
+                            type: 'string',
+                        },
+                        category: {
+                            type: 'string',
+                            enum: ['IT', 'HR', 'Access', 'Payroll', 'Other'],
+                        },
+                        priority: {
+                            type: 'string',
+                            enum: ['Low', 'Medium', 'High'],
+                        },
+                        suggested_response: {
+                            type: 'string',
+                        },
+                        usage_count: {
+                            type: 'integer',
+                            default: 0,
+                        },
+                        createdAt: {
+                            type: 'string',
+                            format: 'date-time',
+                        },
+                        updatedAt: {
+                            type: 'string',
+                            format: 'date-time',
+                        },
+                    },
+                },
             },
             securitySchemes: {
                 bearerAuth: {

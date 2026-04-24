@@ -15,7 +15,7 @@ export const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/KBEntry'
+ *             $ref: '#/components/schemas/KnowledgeBase'
  *     responses:
  *       201:
  *         description: Knowledge base entry created successfully
