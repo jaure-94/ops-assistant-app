@@ -16,18 +16,10 @@ export const getLandingPage = (req: Request, res: Response) => {
         </style>
     </head>
     <body>
-        <div class="card">
-            <h1>🤖 Automated Ops Assistant API</h1>
-            <p>The system is <strong>Live</strong>. Use the endpoints below to test the Triage and Reporting engine via a tool like Postman.</p>
-            <h3>1. Create a Ticket <span class="tag">POST</span></h3>
-            <code>POST /tickets</code>
-            <h3>2. Daily Report <span class="tag">GET</span></h3>
-            <code>GET /reports</code>
-            <h3>3. Knowledge Base <span class="tag">POST</span></h3>
-            <code>POST /kb</code>
-            <hr>
-            <p>View the <a href="https://github.com/jaure-94/ops-assistant-app">Full Documentation on GitHub</a>.</p>
-        </div>
+        <h1>🤖 Automated Ops Assistant API</h1>
+        <p>The API is live. Please test it using Swagger at the endpoint below:</p>
+        <p><a href="https://ops-assistant-app.onrender.com/api-docs/">https://ops-assistant-app.onrender.com/api-docs/</a></p>
+        <p>If you want to explore endpoints manually, open the Swagger UI and use the interactive docs there.</p>
     </body>
     </html>
   `);
