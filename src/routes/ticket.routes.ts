@@ -4,19 +4,55 @@ import { getAllTickets, getTicketById, createTicket } from "../controllers/ticke
 export const router = Router();
 
 /**
- * GET /tickets
- * Retrieves all tickets
+ * @openapi
+ * /tickets:
+ *  get:
+ *    tags:
+ *      - Tickets
+ *    description: Retrieve all tickets
+ *    responses:
+ *      200:
+ *        description: A list of all tickets
  */
+
 router.get("/", getAllTickets);
 
 /**
- * GET /tickets/:id
- * Retrieves a specific ticket by ID
+ * @openapi
+ * /tickets/{id}:
+ *  get:
+ *    tags:
+ *      - Ticket
+ *    description: Retrieve a specific ticket by ID
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *    responses:
+ *      200:
+ *        description: A single ticket
+ *      404:
+ *        description: Ticket not found
  */
 router.get("/:id", getTicketById);
 
 /**
- * POST /tickets
- * Creates a new ticket
+ * @openapi
+ * /tickets:
+ *  post:
+ *    tags:
+ *      - Create Ticket
+ *    description: Creates a new ticket
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Ticket'
+ *    responses:
+ *      201:
+ *        description: Ticket created successfully
  */
 router.post("/", createTicket);

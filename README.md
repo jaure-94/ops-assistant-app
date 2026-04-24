@@ -1,4 +1,4 @@
-# 🤖 Automated Ops Assistant
+# 🤖 Automated Ops Assistant (https://ops-assistant-app.onrender.com/)
 
 **A Tiered-Intelligence Triage & Reporting Engine**
 
@@ -21,6 +21,8 @@ The system utilizes a **Hybrid Triage Strategy** to optimize for both cost and s
 
 ## 🚀 API Documentation & Endpoints
 
+API URL: (https://ops-assistant-app.onrender.com/)
+
 ### **Ticket Management**
 * `POST /tickets` – Create and automatically triage a ticket.
 * `GET /tickets` – List all tickets.
@@ -31,6 +33,12 @@ The system utilizes a **Hybrid Triage Strategy** to optimize for both cost and s
 
 ### **Reporting (BI)**
 * `GET /reports` – Real-time Daily Summary with Anomaly Detection.
+
+---
+
+## 🌐 Live API
+
+**Test the API endpoints live:** [https://ops-assistant-app.onrender.com/]
 
 ---
 

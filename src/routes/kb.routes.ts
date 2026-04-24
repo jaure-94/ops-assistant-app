@@ -3,5 +3,21 @@ import { createKBEntry } from '../controllers/kb.controller.js';
 
 export const router = Router();
 
-// One route to rule them all: handles both new entries and updates
+/**
+ * @openapi
+ * /kb:
+ *   post:
+ *     tags:
+ *       - Knowledge Base
+ *     description: Create a new knowledge base entry
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/KBEntry'
+ *     responses:
+ *       201:
+ *         description: Knowledge base entry created successfully
+ */
 router.post('/', createKBEntry);
