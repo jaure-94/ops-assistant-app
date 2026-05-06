@@ -104,8 +104,23 @@ async function triageWithGemini(ticket: any) {
     });
 
     logger.info("✨ Gemini Triage Successful");
-  } catch (error) {
-    logger.error("Gemini Triage Error:", error);
-    await ticket.update({ status: 'failed_triage' });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      if (error.message.includes('503') || error.message.includes('high demand')) {
+        logger.warn('Gemini overloaded. Falling back to Manual Triage status.');
+        
+        await ticket.update({
+          category: 'Unclassified',
+          priority: 'Medium',
+          suggested_response: 'Our AI engine is currently experiencing high demand. A human agent will triage this ticket shortly.',
+          status: 'manual_triage_required'
+        });
+      } else {
+        logger.error(`Gemini Triage Error: ${error.message}`);
+      }
+    } else {
+      // If it's something truly weird that isn't an Error object
+      logger.error('An unexpected error occurred during triage');
+    }
   }
 }
