@@ -7,12 +7,12 @@ export const router = Router();
  * @openapi
  * /tickets:
  *  get:
-*      tags:
-    *    - Tickets
-    *  description: Retrieve all tickets
-    *  responses:
-    *    200:
-    *      description: A list of tickets
+ *    tags:
+ *      - Tickets
+ *    description: Retrieve all tickets
+ *    responses:
+ *      200:
+ *        description: A list of all tickets
  */
 
 router.get("/", getAllTickets);
@@ -21,7 +21,7 @@ router.get("/", getAllTickets);
  * @openapi
  * /tickets/{id}:
  *  get:
- *    tags:*
+ *    tags:
  *      - Ticket
  *    description: Retrieve a specific ticket by ID
  *    parameters:
@@ -34,7 +34,7 @@ router.get("/", getAllTickets);
  *      200:
  *        description: A single ticket
  *      404:
- *        description: Ticket not found 
+ *        description: Ticket not found
  */
 router.get("/:id", getTicketById);
 
