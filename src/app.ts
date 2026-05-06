@@ -3,6 +3,7 @@ import { ticketRouter, reportRouter, kbRouter, homeRouter } from './routes/index
 import { addTimestamp, errorHandler } from './middlewares/index.js';
 import { conn } from './config/index.js';
 import logger from './utils/logger.js';
+import swaggerDocs from './utils/swagger.js';
 
 // create express app
 const app = express();
@@ -19,26 +20,24 @@ app.use("/reports", reportRouter);
 app.use("/kb", kbRouter);
 
 // error handling middleware
-app.use(errorHandler);
+app.use(errorHandler)
 
-// For Vercel serverless deployment
+// wait for db, then start the server
+const startServer = async () => {
+  try {
+    await conn();
+  } catch (error) {
+    logger.error('Failed to connect to the database:', error);
+    process.exit(1);
+  }
+  
+  app.listen(port, () => {
+    logger.info(`Server is running on port ${port}`);
+
+    swaggerDocs(app, port);
+  });
+};
+
+startServer();
+
 export default app;
-
-// For local development (only run server if not in Vercel environment)
-if (process.env.VERCEL !== '1') {
-  // wait for db, then start the server
-  const startServer = async () => {
-    try {
-      await conn();
-    } catch (error) {
-      logger.error('Failed to connect to the database:', error);
-      process.exit(1);
-    }
-    
-    app.listen(port, () => {
-      logger.info(`Server is running on port ${port}`);
-    });
-  };
-
-  startServer();
-}
